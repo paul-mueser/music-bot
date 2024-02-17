@@ -1,6 +1,6 @@
 FROM node:20
-RUN sudo apt update
-RUN sudo apt install ffmpeg
+RUN apt update
+RUN apt install ffmpeg
 ENV TZ="Europe/Berlin"
 WORKDIR /usr/src/stats-bot
 COPY package*.json ./
