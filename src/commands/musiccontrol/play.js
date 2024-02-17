@@ -16,6 +16,11 @@ module.exports = {
         const musicLink = interaction.options.get('music-link').value;
 
         const queue = await client.player.nodes.create(interaction.guild, {
+            metadata: {
+                channel: interaction.channel,
+                client: interaction.guild.members.me,
+                requestedBy: interaction.user
+            },
             selfDeaf: true,
             leaveOnEmpty: true,
             leaveOnEnd: true,
@@ -44,7 +49,7 @@ module.exports = {
             .setThumbnail(result.tracks[0].thumbnail)
             .setFooter({text: `Duration: ${result.tracks[0].duration}`}); // todo update embed for playlist support
 
-        if(!queue.isPlaying()) await queue.node.play();
+        if(!queue.node.isPlaying()) await queue.node.play();
 
         await interaction.editReply({
             embeds: [embed]

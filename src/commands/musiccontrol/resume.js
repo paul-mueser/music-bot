@@ -10,7 +10,7 @@ module.exports = {
             return;
         }
 
-        queue.node.setPaused(false);
+        queue.node.resume();
 
         await interaction.editReply('Resume playing.')
     },

@@ -10,7 +10,7 @@ module.exports = {
             return;
         }
 
-        queue.node.setPaused(true);
+        queue.node.pause();
 
         await interaction.editReply('The current song has been paused.')
     },

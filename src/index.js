@@ -19,6 +19,8 @@ const client = new Client({
 const bridgeProvider = new BridgeProvider(BridgeSource.SoundCloud);
 
 client.player = new Player(client, {
+    // todo bridgeProvider for soundcloud only works sometimes
+    // bridgeProvider,
     ytdlOptions: {
         filter: "audioonly",
         quality: "highestaudio",
@@ -26,6 +28,11 @@ client.player = new Player(client, {
     }
 });
 
+client.player.events.on('playerStart', (queue, track) => {
+    // const channel = queue.metadata.channel; // queue.metadata is your "message" object
+    // channel.send(`🎶 | Started playing **${track.title}**`);
+    console.log(`Started playing ${track.title}`)
+});
 eventHandler(client);
 
 client.login(process.env.TOKEN);
