@@ -10,12 +10,14 @@ module.exports = {
             return;
         }
 
-        queue.node.setPaused(true);
+        if (!queue.deleted) {
+            queue.delete();
+        }
 
-        await interaction.editReply('The current song has been paused.')
+        await interaction.editReply('Bye, Bye!')
     },
 
-    name: 'pause',
-    description: 'Pause the current song.',
+    name: 'stop',
+    description: 'Stops playing music.',
     devOnly: true,
 };

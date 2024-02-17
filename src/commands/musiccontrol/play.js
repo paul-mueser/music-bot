@@ -17,12 +17,11 @@ module.exports = {
 
         const queue = await client.player.nodes.create(interaction.guild);
 
-        if (!queue.connection) await queue.connect(interaction.member.voice.channel)
+        if (!queue.connection) await queue.connect(interaction.member.voice.channel);
 
-        ;
         const result = await client.player.search(musicLink, {
             requestedBy: interaction.usage,
-            searchEngine: QueryType.YOUTUBE_VIDEO,
+            searchEngine: QueryType.AUTO, // todo change query type based on input (musicLink)
         });
 
         if (result.tracks.length === 0) {
@@ -30,15 +29,14 @@ module.exports = {
             return;
         }
 
-        const song = result.tracks[0]
-        await queue.addTrack(song);
+        result.playlist ? queue.addTrack(result.tracks) : queue.addTrack(result.tracks[0]);
 
         let embed = new EmbedBuilder()
-            .setDescription(`Àdded **[${song.title}](${song.url})** to the queue.`)
-            .setThumbnail(song.thumbnail)
-            .setFooter({text: `Duration: ${song.duration}`});
+            .setDescription(`Added **[${result.tracks[0].title}](${result.tracks[0].url})** to the queue.`)
+            .setThumbnail(result.tracks[0].thumbnail)
+            .setFooter({text: `Duration: ${result.tracks[0].duration}`}); // todo update embed for playlist support
 
-        if(!queue.isPlaying()) await queue.play(musicLink);
+        if(!queue.isPlaying()) await queue.node.play();
 
         await interaction.editReply({
             embeds: [embed]

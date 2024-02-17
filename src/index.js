@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const {Client, GatewayIntentBits} = require('discord.js');
 const {Player} = require('discord-player');
+const {BridgeProvider, BridgeSource} = require('@discord-player/extractor');
 
 const eventHandler = require('./handlers/eventHandler');
 
@@ -14,6 +15,8 @@ const client = new Client({
         GatewayIntentBits.GuildVoiceStates,
     ],
 });
+
+const bridgeProvider = new BridgeProvider(BridgeSource.SoundCloud);
 
 client.player = new Player(client, {
     ytdlOptions: {
