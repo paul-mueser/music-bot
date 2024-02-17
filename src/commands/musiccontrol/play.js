@@ -15,7 +15,15 @@ module.exports = {
 
         const musicLink = interaction.options.get('music-link').value;
 
-        const queue = await client.player.nodes.create(interaction.guild);
+        const queue = await client.player.nodes.create(interaction.guild, {
+            selfDeaf: true,
+            leaveOnEmpty: true,
+            leaveOnEnd: true,
+            leaveOnEmptyCooldown: 5000,
+            leaveOnEndCooldown: 5000,
+            skipOnNoStream: true,
+            connectionTimeout: 999_999_999
+        });
 
         if (!queue.connection) await queue.connect(interaction.member.voice.channel);
 
