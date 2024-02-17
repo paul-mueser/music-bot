@@ -37,12 +37,12 @@ module.exports = {
             searchEngine: QueryType.AUTO, // todo change query type based on input (musicLink)
         });
 
-        if (result.tracks.length === 0) {
+        if (!result.hasTracks() || result.isEmpty()) {
             await interaction.editReply("No results found!");
             return;
         }
 
-        result.playlist ? queue.addTrack(result.tracks) : queue.addTrack(result.tracks[0]);
+        result.hasPlaylist() ? queue.addTrack(result.tracks) : queue.addTrack(result.tracks[0]);
 
         let embed = new EmbedBuilder()
             .setDescription(`Added **[${result.tracks[0].title}](${result.tracks[0].url})** to the queue.`)
