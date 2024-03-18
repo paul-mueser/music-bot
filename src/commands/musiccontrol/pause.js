@@ -17,5 +17,4 @@ module.exports = {
 
     name: 'pause',
     description: 'Pause the current song.',
-    devOnly: true,
 };

@@ -17,5 +17,4 @@ module.exports = {
 
     name: 'resume',
     description: 'Resume the current song.',
-    devOnly: true,
 };

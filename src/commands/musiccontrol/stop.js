@@ -19,5 +19,4 @@ module.exports = {
 
     name: 'stop',
     description: 'Stops playing music.',
-    devOnly: true,
 };

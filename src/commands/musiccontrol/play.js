@@ -59,7 +59,6 @@ module.exports = {
 
     name: 'play',
     description: 'Plays a song.',
-    devOnly: true,
     options: [
         {
             name: 'music-link',
