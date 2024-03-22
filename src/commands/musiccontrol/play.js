@@ -1,4 +1,4 @@
-const {ApplicationCommandOptionType, EmbedBuilder} = require('discord.js');
+const {ApplicationCommandOptionType} = require('discord.js');
 const {QueryType} = require('discord-player')
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
         await client.player.extractors.loadDefault();
 
         if (!interaction.member.voice.channel) {
-            await interaction.editReply("You must be in a voice channel to use this command!");
+            await interaction.editReply({content: 'You must be in a voice channel to use this command!', ephemeral: true});
             return;
         }
 
@@ -39,22 +39,19 @@ module.exports = {
         });
 
         if (!result.hasTracks() || result.isEmpty()) {
-            await interaction.editReply("No results found!");
+            await interaction.editReply({content: 'No results found!', ephemeral: true});
             return;
         }
 
         result.hasPlaylist() ? queue.addTrack(result.tracks) : queue.addTrack(result.tracks[0]);
 
-        let embed = new EmbedBuilder()
-            .setDescription(`Added **[${result.tracks[0].title}](${result.tracks[0].url})** to the queue.`)
-            .setThumbnail(result.tracks[0].thumbnail)
-            .setFooter({text: `Duration: ${result.tracks[0].duration}`}); // todo update embed for playlist support
-
         if(!queue.node.isPlaying()) await queue.node.play();
 
-        await interaction.editReply({
-            embeds: [embed]
-        });
+        if (result.hasPlaylist()) {
+            await interaction.editReply(`Successfully added \`${result.tracks.length}\` tracks to the queue.`);
+        } else {
+            await interaction.editReply(`Successfully added \`${result.tracks[0].title}\` by \`${result.tracks[0].author}\` to the queue.`);
+        }
     },
 
     name: 'play',

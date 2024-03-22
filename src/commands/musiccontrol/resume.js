@@ -6,8 +6,7 @@ module.exports = {
         const queue = client.player.nodes.get(interaction.guild);
 
         if (!queue) {
-            await interaction.editReply('There is no song playing.');
-            return;
+            return interaction.editReply({content: 'There is no song in the queue to play.', ephemeral: true});
         }
 
         queue.node.resume();

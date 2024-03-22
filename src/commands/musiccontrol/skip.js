@@ -1,5 +1,3 @@
-const {EmbedBuilder} = require('discord.js');
-
 module.exports = {
 
     callback: async (client, interaction) => {
@@ -8,20 +6,14 @@ module.exports = {
         const queue = client.player.nodes.get(interaction.guild);
 
         if (!queue) {
-            await interaction.editReply('There is no song playing.');
-            return;
+            return interaction.editReply({content: 'There is no song playing.', ephemeral: true});
         }
 
         const currentSong = queue.currentTrack;
 
         queue.node.skip();
 
-        await interaction.editReply({
-            embeds: [
-                new EmbedBuilder()
-                    .setDescription(`Skipped **${currentSong.title}**`)
-            ]
-        })
+        await interaction.editReply(`Skipped **${currentSong.title}**`)
     },
 
     name: 'skip',
