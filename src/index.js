@@ -34,3 +34,5 @@ registerPlayerEvents(client.player, client);
 eventHandler(client);
 
 client.login(process.env.TOKEN);
+
+// todo add button controls to README and update website after that
