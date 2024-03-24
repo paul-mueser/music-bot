@@ -40,6 +40,10 @@ const registerPlayerEvents = (player, client) => {
         if (queue.dashboard) {
             queue.dashboard.delete();
         }
+
+        if (queue.queueContent && queue.queueContent.message) {
+            queue.queueContent.message.delete();
+        }
     });
 }
 

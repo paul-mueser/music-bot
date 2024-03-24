@@ -1,4 +1,5 @@
 const {EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
+const {button} = require("../../utils/constants");
 
 module.exports = {
 
@@ -28,11 +29,31 @@ module.exports = {
             tracks.push(`And **${length - 10}** more...`);
         }
 
+        if (!queue.queueContent) {
+            queue.queueContent = {};
+        }
+
+        queue.queueContent.messageTracks = queue.tracks.map((track, i) => `**${i + 1}**. [${track.title}](${track.url}) - \`${track.duration}\``);
+
+        if (queue.queueContent.message) {
+            await queue.queueContent.message.delete();
+        }
+
         const queueEmbed = new EmbedBuilder()
             .setTitle('Queue')
             .setDescription(tracks.join('\n'));
 
-        await interaction.editReply({embeds: [queueEmbed]});
+        await interaction.editReply('Here is the queue:');
+
+        if (queue.queueContent.messageTracks.length > 10) {
+            const forwardButton = new ButtonBuilder().setCustomId('Queue-Forward').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
+            const row = new ActionRowBuilder().addComponents(forwardButton);
+
+            queue.queueContent.message = await queue.metadata.channel.send({ embeds: [queueEmbed], components: [row] });
+        } else {
+            queue.queueContent.message = await queue.metadata.channel.send({ embeds: [queueEmbed] });
+        }
+        queue.queueContent.page = 0;
     },
 
     name: 'queue',

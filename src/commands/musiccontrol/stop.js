@@ -17,6 +17,10 @@ module.exports = {
             queue.dashboard.delete();
         }
 
+        if (queue.queueContent && queue.queueContent.message) {
+            queue.queueContent.message.delete();
+        }
+
         await interaction.editReply('Bye, Bye!')
     },
 
