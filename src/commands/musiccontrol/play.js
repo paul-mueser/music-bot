@@ -35,7 +35,7 @@ module.exports = {
 
         const result = await client.player.search(musicLink, {
             requestedBy: interaction.usage,
-            searchEngine: QueryType.AUTO, // todo change query type based on input (musicLink)
+            searchEngine: QueryType.AUTO,
         });
 
         if (!result.hasTracks() || result.isEmpty()) {

@@ -18,7 +18,5 @@ module.exports = async (client, channelId) => {
             });
     }
 
-    // todo fix error: first message isn't fetched
-
     return messages;
 };

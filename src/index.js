@@ -20,7 +20,7 @@ const client = new Client({
 const bridgeProvider = new BridgeProvider(BridgeSource.SoundCloud);
 
 client.player = new Player(client, {
-    // todo bridgeProvider for soundcloud only works sometimes
+    // bridgeProvider for soundcloud, only works with soundcloud premium account (not free)
     // bridgeProvider,
     ytdlOptions: {
         filter: "audioonly",
@@ -34,5 +34,3 @@ registerPlayerEvents(client.player, client);
 eventHandler(client);
 
 client.login(process.env.TOKEN);
-
-// todo add button controls to README and update website after that
