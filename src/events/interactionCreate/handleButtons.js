@@ -31,12 +31,14 @@ module.exports = async (client, interaction) => {
                 queue.node.resume();
             }
 
+            const loop = queue.repeatMode === 1;
+
             const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(playing ? button.play : button.pause).setStyle(playing ? ButtonStyle.Success : ButtonStyle.Secondary);
             const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
             const stopButton = new ButtonBuilder().setCustomId('Playing-Stop').setEmoji(button.stop).setStyle(ButtonStyle.Danger);
-            // const loopButton = new ButtonBuilder().setCustomId('Playing-Loop').setEmoji(button.loop).setStyle(ButtonStyle.Secondary);
+            const loopButton = new ButtonBuilder().setCustomId('Playing-Loop').setEmoji(button.loop).setStyle(loop ? ButtonStyle.Danger : ButtonStyle.Secondary);
             const shuffleButton = new ButtonBuilder().setCustomId('Playing-Shuffle').setEmoji(button.shuffle).setStyle(ButtonStyle.Secondary);
-            const row = new ActionRowBuilder().addComponents(playPauseButton, skipButton, stopButton, shuffleButton);
+            const row = new ActionRowBuilder().addComponents(playPauseButton, skipButton, stopButton, loopButton, shuffleButton);
 
             await interaction.update({ components: [row] });
         } break;
@@ -51,14 +53,34 @@ module.exports = async (client, interaction) => {
                 await wait(500);
             }
 
-            let playing = !queue.node.isPaused();
+            const playing = queue.node.isPaused();
+            const loop = queue.repeatMode === 1;
 
             const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(playing ? button.play : button.pause).setStyle(playing ? ButtonStyle.Success : ButtonStyle.Secondary);
             const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
             const stopButton = new ButtonBuilder().setCustomId('Playing-Stop').setEmoji(button.stop).setStyle(ButtonStyle.Danger);
-            // const loopButton = new ButtonBuilder().setCustomId('Playing-Loop').setEmoji(button.loop).setStyle(ButtonStyle.Secondary);
+            const loopButton = new ButtonBuilder().setCustomId('Playing-Loop').setEmoji(button.loop).setStyle(loop ? ButtonStyle.Danger : ButtonStyle.Secondary);
             const shuffleButton = new ButtonBuilder().setCustomId('Playing-Shuffle').setEmoji(button.shuffle).setStyle(ButtonStyle.Secondary);
-            const row = new ActionRowBuilder().addComponents(playPauseButton, skipButton, stopButton, shuffleButton);
+            const row = new ActionRowBuilder().addComponents(playPauseButton, skipButton, stopButton, loopButton, shuffleButton);
+
+            await interaction.update({ components: [row] });
+        } break;
+        case 'Playing-Loop': {
+            const loop = queue.repeatMode === 1;
+            if (loop) {
+                queue.setRepeatMode(0);
+            } else {
+                queue.setRepeatMode(1);
+            }
+
+            let playing = queue.node.isPaused();
+
+            const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(playing ? button.play : button.pause).setStyle(playing ? ButtonStyle.Success : ButtonStyle.Secondary);
+            const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
+            const stopButton = new ButtonBuilder().setCustomId('Playing-Stop').setEmoji(button.stop).setStyle(ButtonStyle.Danger);
+            const loopButton = new ButtonBuilder().setCustomId('Playing-Loop').setEmoji(button.loop).setStyle(!loop ? ButtonStyle.Danger : ButtonStyle.Secondary);
+            const shuffleButton = new ButtonBuilder().setCustomId('Playing-Shuffle').setEmoji(button.shuffle).setStyle(ButtonStyle.Secondary);
+            const row = new ActionRowBuilder().addComponents(playPauseButton, skipButton, stopButton, loopButton, shuffleButton);
 
             await interaction.update({ components: [row] });
         } break;
