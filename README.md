@@ -8,8 +8,7 @@ of a music bot.
 ## [](#features)Features
 
 The bot can play music from YouTube, SoundCloud, Apple Music and Spotify and has a queue system. It also has
-some commands to
-control the music and the bot itself.
+some commands and buttons to control the music and the bot itself.
 
 ## [](#before-starting)Before starting
 
