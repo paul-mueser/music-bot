@@ -62,5 +62,7 @@ with the command `docker run -d --env TOKEN=xxx paulmueser/musicbotdocker`.
 - pause - pauses the music
 - queue - shows the current queue
 - resume - resumes the music
+- shuffle - shuffles the queue
 - skip - skips the current song
 - stop - stops playing music and disconnects from the channel
+- toggleloop - toggles the loop mode
