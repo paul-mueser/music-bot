@@ -11,7 +11,7 @@ module.exports = {
 
         queue.tracks.shuffle();
 
-        await interaction.reply('I\'ve mixed things up a bit in the queue.');
+        await interaction.editReply('I\'ve mixed things up a bit in the queue.');
     },
 
     name: 'shuffle',
