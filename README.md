@@ -1,5 +1,6 @@
 ![Publish Docker Image](https://github.com/paul-mueser/music-bot/actions/workflows/docker-image.yml/badge.svg)
 [![GitHub release](https://img.shields.io/github/release/paul-mueser/music-bot.svg)](https://github.com/paul-mueser/music-bot/releases)
+[![GitHub license](https://badgen.net/github/license/paul-mueser/music-bot)](https://github.com/paul-mueser/music-bot/blob/main/LICENSE)
 
 # Basic discord bot using discord js
 
