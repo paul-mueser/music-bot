@@ -1,4 +1,5 @@
 ![Publish Docker Image](https://github.com/paul-mueser/music-bot/actions/workflows/docker-image.yml/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/paul-mueser/music-bot/releases)
 
 # Basic discord bot using discord js
 
