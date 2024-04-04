@@ -1,3 +1,5 @@
+![Publish Docker Image](https://github.com/paul-mueser/music-bot/actions/workflows/docker-image.yml/badge.svg)
+
 # Basic discord bot using discord js
 
 ## [](#general)General
