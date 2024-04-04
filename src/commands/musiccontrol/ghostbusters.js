@@ -1,5 +1,5 @@
 //
-const {ButtonBuilder, ButtonStyle, ActionRowBuilder} = require('discord.js');
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder} = require('discord.js');
 const {QueryType} = require('discord-player')
 const {button} = require("../../utils/constants");
 const {wait} = require("../../utils/wait");
