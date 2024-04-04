@@ -58,8 +58,9 @@ with the command `docker run -d --env TOKEN=xxx paulmueser/musicbotdocker`.
 
 ### [](#musicControl)Music Control
 
-- play {song} - plays a song
+- ghostbusters - plays the ghostbusters theme on repeat
 - pause - pauses the music
+- play {song} - plays a song
 - queue - shows the current queue
 - resume - resumes the music
 - shuffle - shuffles the queue
