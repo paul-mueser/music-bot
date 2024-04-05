@@ -1,4 +1,3 @@
-//
 const {ButtonBuilder, ButtonStyle, ActionRowBuilder} = require('discord.js');
 const {QueryType} = require('discord-player')
 const {button} = require("../../utils/constants");
@@ -49,6 +48,7 @@ module.exports = {
         if(!queue.node.isPlaying()) {
             await queue.node.play();
         } else {
+            queue.setRepeatMode(0);
             queue.node.skip();
         }
 
