@@ -62,6 +62,8 @@ with the command `docker run -d --env TOKEN=xxx paulmueser/musicbotdocker`.
 ### [](#musicControl)Music Control
 
 - ghostbusters - plays the ghostbusters theme on repeat
+- ketchup - plays the ketchup song on repeat
+- lillifee - plays the lillifee song on repeat
 - pause - pauses the music
 - play {song} - plays a song
 - queue - shows the current queue
@@ -70,3 +72,4 @@ with the command `docker run -d --env TOKEN=xxx paulmueser/musicbotdocker`.
 - skip - skips the current song
 - stop - stops playing music and disconnects from the channel
 - toggleloop - toggles the loop mode
+- whosthatwonderfulgirl - plays the song "Who's that wonderful girl" on repeat
