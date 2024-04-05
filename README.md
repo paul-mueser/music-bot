@@ -36,9 +36,8 @@ TOKEN=xxx
 
 ### [](#developing-and-testing)Developing & testing
 
-For testing, you can change the `testServer` and `devs` properties in `config.json` file to to your test server id and
-your developers discord
-id's.  
+For testing, you can change the `testServer` and `devs` properties in `config.json` file to your test server id and
+your developers discord id's.  
 Now you can run the bot with the argument `--test` to start the bot in
 development mode, where new commands only get registered on your testServer.  
 Pay attention, that the already registered commands will still be available on all servers.
