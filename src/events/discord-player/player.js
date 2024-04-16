@@ -3,7 +3,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { button } = require('../../utils/constants');
 const editQueueDashboard = require("../../utils/editQueueDashboard");
 
-const registerPlayerEvents = (player, client) => {
+const registerPlayerEvents = (player) => {
     player.events.on('connection', async (queue) => {
         const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(button.pause).setStyle(ButtonStyle.Secondary);
         const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
