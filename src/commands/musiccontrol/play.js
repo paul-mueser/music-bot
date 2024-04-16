@@ -27,7 +27,6 @@ module.exports = {
             leaveOnEnd: true,
             leaveOnEmptyCooldown: 5000,
             leaveOnEndCooldown: 5000,
-            skipOnNoStream: true,
             connectionTimeout: 999_999_999
         });
 

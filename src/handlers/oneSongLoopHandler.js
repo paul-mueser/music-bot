@@ -1,7 +1,6 @@
 const {QueryType} = require("discord-player");
 const {wait} = require("../utils/wait");
-const {ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
-const {button} = require("../utils/constants");
+const editQueueDashboard = require("../utils/editQueueDashboard");
 
 module.exports = async (client, interaction, songLink, replyText) => {
 
@@ -26,7 +25,6 @@ module.exports = async (client, interaction, songLink, replyText) => {
         leaveOnEnd: true,
         leaveOnEmptyCooldown: 5000,
         leaveOnEndCooldown: 5000,
-        skipOnNoStream: true,
         connectionTimeout: 999_999_999
     });
 
@@ -57,14 +55,7 @@ module.exports = async (client, interaction, songLink, replyText) => {
     await interaction.editReply(replyText);
 
     if (queue.dashboard) {
-        const playing = queue.node.isPaused();
-
-        const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(playing ? button.play : button.pause).setStyle(playing ? ButtonStyle.Success : ButtonStyle.Secondary);
-        const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
-        const stopButton = new ButtonBuilder().setCustomId('Playing-Stop').setEmoji(button.stop).setStyle(ButtonStyle.Danger);
-        const loopButton = new ButtonBuilder().setCustomId('Playing-Loop').setEmoji(button.loop).setStyle(ButtonStyle.Danger);
-        const shuffleButton = new ButtonBuilder().setCustomId('Playing-Shuffle').setEmoji(button.shuffle).setStyle(ButtonStyle.Secondary);
-        const row = new ActionRowBuilder().addComponents(playPauseButton, skipButton, stopButton, loopButton, shuffleButton);
+        const row = editQueueDashboard(queue);
 
         queue.dashboard.edit({ components: [row] });
     }
