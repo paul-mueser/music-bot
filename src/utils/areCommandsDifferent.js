@@ -28,9 +28,7 @@ module.exports = (existingCommand, localCommand) => {
   
         if (
           localOption.description !== existingOption.description ||
-          localOption.type !== existingOption.type ||
-          (localOption.required || false) !== existingOption.required ||
-          (localOption.choices?.length || 0) !==
+            localOption.type !== existingOption.type || localOption.required !== existingOption.required || (localOption.choices?.length || 0) !==
             (existingOption.choices?.length || 0) ||
           areChoicesDifferent(
             localOption.choices || [],
@@ -43,13 +41,7 @@ module.exports = (existingCommand, localCommand) => {
       return false;
     };
   
-    if (
-      existingCommand.description !== localCommand.description ||
-      existingCommand.options?.length !== (localCommand.options?.length || 0) ||
-      areOptionsDifferent(existingCommand.options, localCommand.options || [])
-    ) {
-      return true;
-    }
-  
-    return false;
+    return existingCommand.description !== localCommand.description ||
+        existingCommand.options?.length !== (localCommand.options?.length || 0) ||
+        areOptionsDifferent(existingCommand.options, localCommand.options || []);
   };
