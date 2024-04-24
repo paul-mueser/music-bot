@@ -29,7 +29,7 @@ client.player = new Player(client, {
     }
 });
 
-registerPlayerEvents(client.player);
+registerPlayerEvents(client, client.player);
 
 eventHandler(client);
 
