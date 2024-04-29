@@ -1,9 +1,9 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ActivityType } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 const { button } = require('../../utils/constants');
 const editQueueDashboard = require("../../utils/editQueueDashboard");
 
-const registerPlayerEvents = (client, player) => {
+const registerPlayerEvents = (player) => {
     player.events.on('connection', async (queue) => {
         const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(button.pause).setStyle(ButtonStyle.Secondary);
         const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
@@ -18,11 +18,6 @@ const registerPlayerEvents = (client, player) => {
     });
 
     player.events.on('playerStart', async (queue, track) => {
-        client.user.setActivity({
-            name: `🔊 ${track.title}`,
-            type: ActivityType.Custom,
-        });
-
         const row = editQueueDashboard(queue);
 
         const dashboardEmbed = new EmbedBuilder()
@@ -35,11 +30,6 @@ const registerPlayerEvents = (client, player) => {
     });
 
     player.events.on('disconnect', (queue) => {
-        client.user.setActivity({
-            name: `/play for music`,
-            type: ActivityType.Custom,
-        });
-
         if (queue.dashboard) {
             queue.dashboard.reply('Bye, Bye!');
             queue.dashboard.delete();
