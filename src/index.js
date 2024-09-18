@@ -3,6 +3,7 @@ require('dotenv').config();
 const {Client, GatewayIntentBits} = require('discord.js');
 const {Player} = require('discord-player');
 const {BridgeProvider, BridgeSource} = require('@discord-player/extractor');
+const {YoutubeiExtractor} = require("discord-player-youtubei")
 
 const registerPlayerEvents = require('./events/discord-player/player');
 const eventHandler = require('./handlers/eventHandler');
@@ -28,6 +29,8 @@ client.player = new Player(client, {
         highWaterMark: 1 << 25
     }
 });
+
+client.player.extractors.register(YoutubeiExtractor, {});
 
 registerPlayerEvents(client.player);
 
