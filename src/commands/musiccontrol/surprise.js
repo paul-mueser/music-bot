@@ -59,6 +59,7 @@ module.exports = {
             name: 'count',
             description: 'How many times do you want to be surprised?',
             type: ApplicationCommandOptionType.Integer,
+            required: false,
         },
     ],
 };
