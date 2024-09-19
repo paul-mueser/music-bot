@@ -34,7 +34,7 @@ token of the bot into this file like this:
 TOKEN=xxx
 ```
 
-### [](#developing-and-testing)Developing & testing
+### [](#developing--testing)Developing & testing
 
 For testing, you can change the `testServer` and `devs` properties in `config.json` file to your test server id and
 your developers discord id's.  
@@ -42,7 +42,7 @@ Now you can run the bot with the argument `--test` to start the bot in
 development mode, where new commands only get registered on your testServer.  
 Pay attention, that the already registered commands will still be available on all servers.
 
-## [](#running)Running the bot
+## [](#running-the-bot)Running the bot
 
 To run the bot, you need to open a terminal in the root directory of the project and run the command
 `npm run src/index.js`.
@@ -59,17 +59,21 @@ with the command `docker run -d --env TOKEN=xxx paulmueser/musicbotdocker`.
 
 - ping - Pong!
 
-### [](#musicControl)Music Control
+### [](#music-control)Music Control
 
+- bereit - plays "be prepared" from "The Lion King" (german version) on repeat
 - ghostbusters - plays the ghostbusters theme on repeat
 - ketchup - plays the ketchup song on repeat
-- lillifee - plays the lillifee song on repeat
+- lillifee - plays the lillifee dance on repeat
+- metronom - plays the metronom song on repeat
 - pause - pauses the music
 - play {song} - plays a song
 - queue - shows the current queue
 - resume - resumes the music
+- scar - plays "The Madness of King Scar" from "The Lion King" (german version) on repeat
 - shuffle - shuffles the queue
 - skip - skips the current song
 - stop - stops playing music and disconnects from the channel
+- surprise - plays a random song from the surprise list (see `surprise.js`)
 - toggleloop - toggles the loop mode
 - whosthatwonderfulgirl - plays the song "Who's that wonderful girl" on repeat
