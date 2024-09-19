@@ -42,7 +42,7 @@ module.exports = async (client, interaction, songLink, replyText) => {
 
     await queue.insertTrack(result.tracks[0], 0);
 
-    if(!queue.node.isPlaying()) {
+    if (!queue.node.isPlaying()) {
         await queue.node.play();
     } else {
         queue.setRepeatMode(0);
@@ -57,6 +57,6 @@ module.exports = async (client, interaction, songLink, replyText) => {
     if (queue.dashboard) {
         const row = editQueueDashboard(queue);
 
-        queue.dashboard.edit({ components: [row] });
+        queue.dashboard.edit({components: [row]});
     }
 };

@@ -1,7 +1,7 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} = require('discord.js');
+const {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} = require('discord.js');
 
-const { wait } = require('../../utils/wait');
-const { button } = require('../../utils/constants');
+const {wait} = require('../../utils/wait');
+const {button} = require('../../utils/constants');
 const editQueueDashboard = require("../../utils/editQueueDashboard");
 
 module.exports = async (client, interaction) => {
@@ -32,8 +32,9 @@ module.exports = async (client, interaction) => {
 
             const row = editQueueDashboard(queue);
 
-            await interaction.update({ components: [row] });
-        } break;
+            await interaction.update({components: [row]});
+        }
+            break;
         case 'Playing-Skip': {
             if (queue.repeatMode === 1) {
                 queue.setRepeatMode(0);
@@ -47,8 +48,9 @@ module.exports = async (client, interaction) => {
 
             const row = editQueueDashboard(queue);
 
-            await interaction.update({ components: [row] });
-        } break;
+            await interaction.update({components: [row]});
+        }
+            break;
         case 'Playing-Loop': {
             if (queue.repeatMode === 1) {
                 queue.setRepeatMode(0);
@@ -58,8 +60,9 @@ module.exports = async (client, interaction) => {
 
             const row = editQueueDashboard(queue);
 
-            await interaction.update({ components: [row] });
-        } break;
+            await interaction.update({components: [row]});
+        }
+            break;
         case 'Playing-Stop': {
             if (!queue.deleted) {
                 queue.delete();
@@ -74,11 +77,13 @@ module.exports = async (client, interaction) => {
             }
 
             await interaction.reply('Bye, Bye!');
-        } break;
+        }
+            break;
         case 'Playing-Shuffle': {
             queue.tracks.shuffle();
             await interaction.reply('I\'ve mixed things up a bit in the queue.');
-        } break;
+        }
+            break;
         case 'Queue-Back': {
             let tracks = queue.queueContent.messageTracks;
 
@@ -97,15 +102,16 @@ module.exports = async (client, interaction) => {
             if (page === 0) {
                 const forwardButton = new ButtonBuilder().setCustomId('Queue-Forward').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
                 const row = new ActionRowBuilder().addComponents(forwardButton);
-                queue.queueContent.message = await interaction.update({ embeds: [queueEmbed], components: [row] });
+                queue.queueContent.message = await interaction.update({embeds: [queueEmbed], components: [row]});
             } else {
                 const backButton = new ButtonBuilder().setCustomId('Queue-Back').setEmoji(button.back).setStyle(ButtonStyle.Secondary);
                 const forwardButton = new ButtonBuilder().setCustomId('Queue-Forward').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
                 const row = new ActionRowBuilder().addComponents(backButton, forwardButton);
-                queue.queueContent.message = await interaction.update({ embeds: [queueEmbed], components: [row] });
+                queue.queueContent.message = await interaction.update({embeds: [queueEmbed], components: [row]});
             }
             queue.queueContent.page = page;
-        } break;
+        }
+            break;
         case 'Queue-Forward': {
             let tracks = queue.queueContent.messageTracks;
 
@@ -129,14 +135,15 @@ module.exports = async (client, interaction) => {
             if (length < 10 * (page + 1)) {
                 const backButton = new ButtonBuilder().setCustomId('Queue-Back').setEmoji(button.back).setStyle(ButtonStyle.Secondary);
                 const row = new ActionRowBuilder().addComponents(backButton);
-                queue.queueContent.message = await interaction.update({ embeds: [queueEmbed], components: [row] });
+                queue.queueContent.message = await interaction.update({embeds: [queueEmbed], components: [row]});
             } else {
                 const backButton = new ButtonBuilder().setCustomId('Queue-Back').setEmoji(button.back).setStyle(ButtonStyle.Secondary);
                 const forwardButton = new ButtonBuilder().setCustomId('Queue-Forward').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
                 const row = new ActionRowBuilder().addComponents(backButton, forwardButton);
-                queue.queueContent.message = await interaction.update({ embeds: [queueEmbed], components: [row] });
+                queue.queueContent.message = await interaction.update({embeds: [queueEmbed], components: [row]});
             }
             queue.queueContent.page = page;
-        } break;
+        }
+            break;
     }
 };

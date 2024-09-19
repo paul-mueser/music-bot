@@ -49,9 +49,9 @@ module.exports = {
             const forwardButton = new ButtonBuilder().setCustomId('Queue-Forward').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);
             const row = new ActionRowBuilder().addComponents(forwardButton);
 
-            queue.queueContent.message = await queue.metadata.channel.send({ embeds: [queueEmbed], components: [row] });
+            queue.queueContent.message = await queue.metadata.channel.send({embeds: [queueEmbed], components: [row]});
         } else {
-            queue.queueContent.message = await queue.metadata.channel.send({ embeds: [queueEmbed] });
+            queue.queueContent.message = await queue.metadata.channel.send({embeds: [queueEmbed]});
         }
         queue.queueContent.page = 0;
     },

@@ -1,6 +1,6 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const {EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
 
-const { button } = require('../../utils/constants');
+const {button} = require('../../utils/constants');
 const editQueueDashboard = require("../../utils/editQueueDashboard");
 
 const registerPlayerEvents = (player) => {
@@ -14,7 +14,7 @@ const registerPlayerEvents = (player) => {
 
         const startEmbed = new EmbedBuilder().setTitle('Dashboard').setDescription('No music is currently playing.');
 
-        queue.dashboard = await queue.metadata.channel.send({ embeds: [startEmbed], components: [row] });
+        queue.dashboard = await queue.metadata.channel.send({embeds: [startEmbed], components: [row]});
     });
 
     player.events.on('playerStart', async (queue, track) => {
@@ -26,7 +26,7 @@ const registerPlayerEvents = (player) => {
             .setThumbnail(track.thumbnail)
             .setTimestamp();
 
-        return await queue.dashboard.edit({ embeds: [dashboardEmbed], components: [row] });
+        return await queue.dashboard.edit({embeds: [dashboardEmbed], components: [row]});
     });
 
     player.events.on('disconnect', (queue) => {
