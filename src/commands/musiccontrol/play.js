@@ -9,7 +9,10 @@ module.exports = {
         await client.player.extractors.loadDefault();
 
         if (!interaction.member.voice.channel) {
-            await interaction.editReply({content: 'You must be in a voice channel to use this command!', ephemeral: true});
+            await interaction.editReply({
+                content: 'You must be in a voice channel to use this command!',
+                ephemeral: true
+            });
             return;
         }
 
@@ -44,7 +47,7 @@ module.exports = {
 
         result.hasPlaylist() ? queue.addTrack(result.tracks) : queue.addTrack(result.tracks[0]);
 
-        if(!queue.node.isPlaying()) await queue.node.play();
+        if (!queue.node.isPlaying()) await queue.node.play();
 
         if (result.hasPlaylist()) {
             await interaction.editReply(`Successfully added \`${result.tracks.length}\` tracks to the queue.`);

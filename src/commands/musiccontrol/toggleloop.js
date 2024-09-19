@@ -22,7 +22,7 @@ module.exports = {
 
         if (queue.dashboard) {
             const row = editQueueDashboard(queue);
-            queue.dashboard.edit({ components: [row] });
+            queue.dashboard.edit({components: [row]});
         }
     },
 
