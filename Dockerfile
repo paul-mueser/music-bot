@@ -1,6 +1,6 @@
 FROM node:20
 ENV TZ="Europe/Berlin"
-WORKDIR /usr/src/stats-bot
+WORKDIR /usr/src/music-bot
 COPY package*.json ./
 RUN npm install
 RUN apt update
