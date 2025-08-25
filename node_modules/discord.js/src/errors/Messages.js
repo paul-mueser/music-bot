@@ -91,11 +91,13 @@ const Messages = {
   [DjsErrorCodes.GuildChannelUnowned]: "The fetched channel does not belong to this manager's guild.",
   [DjsErrorCodes.GuildOwned]: 'Guild is owned by the client.',
   [DjsErrorCodes.GuildMembersTimeout]: "Members didn't arrive in time.",
+  [DjsErrorCodes.GuildSoundboardSoundsTimeout]: "Soundboard sounds didn't arrive in time.",
   [DjsErrorCodes.GuildUncachedMe]: 'The client user as a member of this guild is uncached.',
   [DjsErrorCodes.ChannelNotCached]: 'Could not find the channel where this message came from in the cache!',
   [DjsErrorCodes.StageChannelResolve]: 'Could not resolve channel to a stage channel.',
   [DjsErrorCodes.GuildScheduledEventResolve]: 'Could not resolve the guild scheduled event.',
-  [DjsErrorCodes.FetchOwnerId]: type => `Couldn't resolve the ${type} ownerId to fetch the ${type} member.`,
+  [DjsErrorCodes.FetchOwnerId]: type =>
+    `Couldn't resolve the ${type} ownerId to fetch the ${type} ${type === 'group DM' ? 'owner' : 'member'}.`,
 
   [DjsErrorCodes.InvalidType]: (name, expected, an = false) => `Supplied ${name} is not a${an ? 'n' : ''} ${expected}.`,
   [DjsErrorCodes.InvalidElement]: (type, name, elem) => `Supplied ${type} ${name} includes an invalid element: ${elem}`,
@@ -117,6 +119,8 @@ const Messages = {
   [DjsErrorCodes.MissingManageEmojisAndStickersPermission]: guild =>
     `Client must have Manage Emojis and Stickers permission in guild ${guild} to see emoji authors.`,
 
+  [DjsErrorCodes.NotGuildSoundboardSound]: action =>
+    `Soundboard sound is a default (non-guild) soundboard sound and can't be ${action}.`,
   [DjsErrorCodes.NotGuildSticker]: 'Sticker is a standard (non-guild) sticker and has no author.',
 
   [DjsErrorCodes.ReactionResolveUser]: "Couldn't resolve the user id to remove from the reaction.",
