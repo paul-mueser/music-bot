@@ -1,4 +1,5 @@
 const {EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
+const {useQueue} = require("discord-player");
 const {button} = require("../../utils/constants");
 
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
             return;
         }
 
-        const queue = client.player.nodes.get(interaction.guildId);
+        const queue = useQueue(interaction.guild);
 
         if (!queue || !queue.currentTrack) {
             return interaction.editReply('❌ | There is no music playing!');

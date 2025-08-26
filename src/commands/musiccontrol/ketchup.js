@@ -1,4 +1,4 @@
-const oneSongLoopHandler = require('../../handlers/oneSongLoopHandler')
+const oneSongLoopHandler = require('../../handlers/oneSongLoopHandler');
 
 module.exports = {
 

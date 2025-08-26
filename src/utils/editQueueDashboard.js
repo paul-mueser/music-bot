@@ -1,9 +1,10 @@
 const {ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const {button} = require("./constants");
+const { QueueRepeatMode } = require("discord-player");
 
 module.exports = (queue) => {
     const playing = queue.node.isPaused();
-    const loop = queue.repeatMode === 1;
+    const loop = queue.repeatMode === QueueRepeatMode.TRACK;
 
     const playPauseButton = new ButtonBuilder().setCustomId('Playing-PlayPause').setEmoji(playing ? button.play : button.pause).setStyle(playing ? ButtonStyle.Success : ButtonStyle.Secondary);
     const skipButton = new ButtonBuilder().setCustomId('Playing-Skip').setEmoji(button.skip).setStyle(ButtonStyle.Secondary);

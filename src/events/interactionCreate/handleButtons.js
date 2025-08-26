@@ -1,4 +1,5 @@
 const {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} = require('discord.js');
+const {useQueue, useTimeline, QueueRepeatMode} = require('discord-player');
 
 const {wait} = require('../../utils/wait');
 const {button} = require('../../utils/constants');
@@ -15,7 +16,7 @@ module.exports = async (client, interaction) => {
         return interaction.reply({content: "You must be in the same voice channel as me!", ephemeral: true});
     }
 
-    const queue = client.player.nodes.get(interaction.guildId);
+    const queue = useQueue(interaction.guild);
 
     if (!queue || !queue.isPlaying()) {
         return interaction.reply({content: `There is currently no music playing.`, ephemeral: true});
@@ -36,11 +37,11 @@ module.exports = async (client, interaction) => {
         }
             break;
         case 'Playing-Skip': {
-            if (queue.repeatMode === 1) {
-                queue.setRepeatMode(0);
+            if (queue.repeatMode === QueueRepeatMode.TRACK) {
+                queue.setRepeatMode(QueueRepeatMode.OFF);
                 queue.node.skip();
                 await wait(500);
-                queue.setRepeatMode(1);
+                queue.setRepeatMode(QueueRepeatMode.TRACK);
             } else {
                 queue.node.skip();
                 await wait(500);
@@ -52,11 +53,7 @@ module.exports = async (client, interaction) => {
         }
             break;
         case 'Playing-Loop': {
-            if (queue.repeatMode === 1) {
-                queue.setRepeatMode(0);
-            } else {
-                queue.setRepeatMode(1);
-            }
+            queue.repeatMode === QueueRepeatMode.TRACK ? queue.setRepeatMode(QueueRepeatMode.OFF) : queue.setRepeatMode(QueueRepeatMode.TRACK);
 
             const row = editQueueDashboard(queue);
 

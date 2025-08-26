@@ -1,4 +1,4 @@
-const {QueryType} = require("discord-player");
+const {useMainPlayer, useQueue, QueueRepeatMode} = require("discord-player");
 const {wait} = require("../utils/wait");
 const editQueueDashboard = require("../utils/editQueueDashboard");
 
@@ -6,33 +6,17 @@ module.exports = async (client, interaction, songLink, replyText) => {
 
     await interaction.deferReply();
 
-    await client.player.extractors.loadDefault();
+    const player = useMainPlayer();
 
     if (!interaction.member.voice.channel) {
         await interaction.editReply({content: 'You must be in a voice channel to use this command!', ephemeral: true});
         return;
     }
 
-    const queue = await client.player.nodes.create(interaction.guild, {
-        metadata: {
-            channel: interaction.channel,
-            client: interaction.guild.members.me,
-            requestedBy: interaction.user
-        },
-        volume: 20,
-        selfDeaf: true,
-        leaveOnEmpty: true,
-        leaveOnEnd: true,
-        leaveOnEmptyCooldown: 5000,
-        leaveOnEndCooldown: 5000,
-        connectionTimeout: 999_999_999
-    });
+    let queue = useQueue(interaction.guild);
 
-    if (!queue.connection) await queue.connect(interaction.member.voice.channel);
-
-    const result = await client.player.search(songLink, {
-        requestedBy: interaction.usage,
-        searchEngine: QueryType.AUTO,
+    const result = await player.search(songLink, {
+        requestedBy: interaction.user
     });
 
     if (!result.hasTracks() || result.isEmpty()) {
@@ -40,17 +24,32 @@ module.exports = async (client, interaction, songLink, replyText) => {
         return;
     }
 
-    await queue.insertTrack(result.tracks[0], 0);
-
-    if (!queue.node.isPlaying()) {
-        await queue.node.play();
+    if (!queue || !queue.isPlaying()) {
+        await player.play(interaction.member.voice.channel, songLink, {
+            nodeOptions: {
+                metadata: {
+                    channel: interaction.channel,
+                    client: interaction.guild.members.me,
+                    requestedBy: interaction.user
+                },
+                volume: 20,
+                selfDeaf: true,
+                leaveOnEmpty: true,
+                leaveOnEnd: true,
+                leaveOnEmptyCooldown: 5000,
+                leaveOnEndCooldown: 5000,
+                connectionTimeout: 999_999_999
+            },
+        });
+        queue = await useQueue(interaction.guild);
     } else {
-        queue.setRepeatMode(0);
+        await queue.insertTrack(result.tracks[0], 0);
+        queue.setRepeatMode(QueueRepeatMode.OFF);
         queue.node.skip();
     }
 
     await wait(500);
-    queue.setRepeatMode(1);
+    queue.setRepeatMode(QueueRepeatMode.TRACK);
 
     await interaction.editReply(replyText);
 
