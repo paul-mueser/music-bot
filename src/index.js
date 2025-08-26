@@ -18,7 +18,7 @@ const client = new Client({
     ],
 });
 
-const bridgeProvider = new BridgeProvider(BridgeSource.SoundCloud);
+//const bridgeProvider = new BridgeProvider(BridgeSource.SoundCloud);
 
 client.player = new Player(client, {
     // bridgeProvider for soundcloud, only works with soundcloud premium account (not free)
