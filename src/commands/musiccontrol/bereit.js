@@ -1,5 +1,6 @@
 const oneSongLoopHandler = require('../../handlers/oneSongLoopHandler')
 const {wait} = require("../../utils/wait");
+const {QueueRepeatMode, useQueue} = require("discord-player");
 
 module.exports = {
 
@@ -9,8 +10,8 @@ module.exports = {
         await oneSongLoopHandler(client, interaction, songLink, replyText);
 
         await wait(500);
-        const queue = client.player.nodes.get(interaction.guild);
-        queue.setRepeatMode(0);
+        const queue = useQueue(interaction.guild);
+        queue.setRepeatMode(QueueRepeatMode.OFF);
     },
 
     name: 'bereit',

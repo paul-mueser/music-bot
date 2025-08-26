@@ -1,5 +1,6 @@
 const {devs, testServer} = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
+const {useMainPlayer} = require("discord-player");
 
 module.exports = async (client, interaction) => {
     if (!interaction.isChatInputCommand()) return;
@@ -59,7 +60,13 @@ module.exports = async (client, interaction) => {
             }
         }
 
-        await commandObject.callback(client, interaction);
+        const player = useMainPlayer();
+        
+        const data = {
+            guild: interaction.guild,
+        };
+        
+        await player.context.provide(data,  () => commandObject.callback(client, interaction));
     } catch (error) {
         console.log(`There was an error running this command: ${error}`);
     }

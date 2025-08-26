@@ -1,11 +1,13 @@
+const {useQueue} = require("discord-player");
+
 module.exports = {
 
     callback: async (client, interaction) => {
         await interaction.deferReply();
 
-        const queue = client.player.nodes.get(interaction.guild);
+        const queue = useQueue(interaction.guild);
 
-        if (!queue) {
+        if (!queue || !queue.isPlaying()) {
             return interaction.editReply({content: 'There is no song playing.', ephemeral: true});
         }
 

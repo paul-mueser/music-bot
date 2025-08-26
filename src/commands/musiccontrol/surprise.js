@@ -1,7 +1,7 @@
 const oneSongLoopHandler = require('../../handlers/oneSongLoopHandler')
 const {wait} = require("../../utils/wait");
 const editQueueDashboard = require("../../utils/editQueueDashboard");
-const {QueryType} = require("discord-player");
+const {QueueRepeatMode, useQueue,QueryType} = require("discord-player");
 const {ApplicationCommandOptionType} = require('discord.js');
 
 module.exports = {
@@ -27,8 +27,8 @@ module.exports = {
         await oneSongLoopHandler(client, interaction, songLink, replyText)
 
         await wait(500);
-        const queue = client.player.nodes.get(interaction.guild);
-        queue.setRepeatMode(0);
+        const queue = useQueue(interaction.guild);
+        queue.setRepeatMode(QueueRepeatMode.OFF);
 
         for (let i = 1; i < count; i++) {
             const songLink = songList[Math.floor(Math.random() * songList.length)];

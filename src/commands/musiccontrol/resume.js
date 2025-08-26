@@ -1,17 +1,19 @@
 const editQueueDashboard = require("../../utils/editQueueDashboard");
+const {useTimeline, useQueue} = require("discord-player");
 
 module.exports = {
 
     callback: async (client, interaction) => {
         await interaction.deferReply();
 
-        const queue = client.player.nodes.get(interaction.guild);
-
-        if (!queue) {
-            return interaction.editReply({content: 'There is no song in the queue to play.', ephemeral: true});
+        const timeline = useTimeline({node: interaction.guild});
+        const queue = useQueue(interaction.guild);
+        
+        if (!timeline || !timeline.paused) {
+            return interaction.editReply({content: 'There is no song paused.', ephemeral: true});
         }
-
-        queue.node.resume();
+        
+        timeline.resume();
 
         await interaction.editReply('Resume playing.')
 
