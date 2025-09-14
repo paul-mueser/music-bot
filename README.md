@@ -45,9 +45,9 @@ Pay attention, that the already registered commands will still be available on a
 ## [](#running-the-bot)Running the bot
 
 To run the bot, you need to open a terminal in the root directory of the project and run the command
-`npm run src/index.js`.
+`node src/index.js`.
 
-If you want to run the bot in development mode, you can run the command `npm run src/index.js --test`.
+If you want to run the bot in development mode, you can run the command `node src/index.js --test`.
 
 If you don't want to develop the bot, you can also run the bot as
 a [docker container from docker hub](https://hub.docker.com/r/paulmueser/musicbotdocker)
