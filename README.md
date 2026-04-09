@@ -4,6 +4,10 @@
 
 # Basic discord bot using discord js
 
+## IMPORTANT
+
+The bot is currently not maintained and probably will not work. That beeing said feel free to make updates, maybe i will work on this bot again in the future.
+
 ## [](#general)General
 
 This is a basic Discord music bot that can play music from YouTube and other sources. It has the basic functionality
